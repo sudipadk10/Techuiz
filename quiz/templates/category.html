@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if name.lower == "python" %}
+python
+
+{% elif name.lower ==   "web development" %}
+web
+
+{% elif name.lower == "robotics" %}
+robotics
+
+{% else %}
+<h1>Kya Hey Bhai Yeh<h1>
+    {{name}}
+
+{% endif %}
+
+
+{% endblock  %}

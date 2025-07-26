@@ -3,6 +3,7 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import *
 
 def index(request):
     
@@ -59,4 +60,19 @@ def logout_view(request):
 
 @login_required(login_url ='/login/')
 def quizzes(request):
-    return render(request, 'quizzes.html')
+    context = {
+        'categories' : Category.objects.all(),
+        
+    }
+    return render(request, 'quizzes.html',context)
+def category_view(request,name):
+    context ={
+        'name' : name ,
+        'category' : Category.objects.all(),
+        'question' : Question.objects.all(),
+        'answer' : Answer.objects.all(),
+    }
+    return render(request,'category.html',context)
+    
+
+
