@@ -68,9 +68,10 @@ def quizzes(request):
 def category_view(request,name):
     context ={
         'name' : name ,
-        'category' : Category.objects.all(),
-        'question' : Question.objects.all(),
-        'answer' : Answer.objects.all(),
+        'categories' : Category.objects.all(),
+        'questions' : Question.objects.all(),
+        'answers' : Answer.objects.all(),
+        'i' : 0,
     }
     return render(request,'category.html',context)
     
