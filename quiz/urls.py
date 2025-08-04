@@ -8,5 +8,7 @@ urlpatterns = [
     path('logout/',views.logout_view,name='logout'),
     path('quizzes/',views.quizzes, name='quizzes'),
     path('quizzes/category/<str:name>', views.category_view, name='category'),
+    path('api/get-quiz' ,views.get_quiz , name="get-quiz"),
+    path('contact/',views.contact_view, name = 'contact'),
 
 ]

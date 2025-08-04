@@ -1,0 +1,6 @@
+asgiref==3.9.1
+Django==5.2.4
+-e git+https://github.com/django-extensions/django-extensions.git@165e100ddb9c893e6b40d7d719d6446427287c17#egg=django_extensions
+pillow==11.3.0
+sqlparse==0.5.3
+typing_extensions==4.14.1

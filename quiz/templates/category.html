@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
+
+
+
 {% block content %}
-<div class="max-w-4xl mx-auto px-4 py-8">
+  <div class="relative">
+<div class="max-w-4xl mx-auto px-4 py-8 ">
+
   <h1 class="text-3xl font-bold text-center text-blue-500 mb-8">Take the {{ name }} Quiz</h1>
 
   <form action="" method="POST" class="space-y-6 bg-white shadow-md rounded-xl p-6">
@@ -21,9 +26,10 @@
                   <input 
                     type="radio" 
                     id="answer-{{ answer.uid }}" 
-                    name="answer_{{ question.uid }}" 
-                    value="{{ answer.uid }}"
+                    name="{{ question.question }}" 
+                    value="{{ answer.answer }}"
                     class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    required
                   >
                   <label for="answer-{{ answer.uid }}" class="text-gray-700">{{ answer.answer }}</label>
                 </div>
@@ -35,10 +41,65 @@
     {% endfor %}
 
     <div class="text-center">
-      <button type="submit" id="submit" class="mt-6 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow">
+      <button type="submit"  id="submit" class="mt-6 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow">
         Submit Quiz
       </button>
     </div>
   </form>
+  
 </div>
+{% if correct != -1 and correct != None %}
+ <div style="display: flex;" class="popup fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 items-center justify-center">
+  <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+    <h1 class="text-green-900 text-2xl font-bold mb-4">Congratulations!!</h1>
+    <p class="text-black text-lg mb-2">You got {{ correct }}% right answer.</p>
+   <button onclick=unpop(); type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">OK</button>
+  </div>
+</div>
+{% endif%}
+
+
+
+</div>
+<!-- my_template.html -->
+
+<script>
+let popup = document.querySelector(".popup");
+function pop(){
+  console.log("POP")
+ popup.style.display = "flex";
+}
+function unpop(){
+  console.log("unpop");
+popup.style.display = "none";
+}
+
+document.querySelector('#submit').addEventListener("click" , (e)=>{
+ 
+ const questions = new Set();
+  document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    questions.add(radio.name);
+  });
+
+  // Check how many unique questions have selected answers
+  const answered = new Set();
+  document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+    answered.add(radio.name);
+  });
+
+  if (answered.size !== questions.size) {
+    e.preventDefault(); // stop form submission
+    alert("Please answer all the questions before submitting.");
+  }
+  else {
+    // Allow form to submit normally
+    // popup will be shown after Django reloads with correct value
+    pop();
+  }
+
+   
+});
+
+</script>
+
 {% endblock %}

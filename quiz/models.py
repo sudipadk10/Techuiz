@@ -1,3 +1,4 @@
+import random
 import uuid
 from django.db import models
 
@@ -23,6 +24,17 @@ class Question(BaseModel):
     marks = models.IntegerField(default=1)
     def __str__(self):
         return self.question
+    
+    def get_answer(self):
+        answers = list(Answer.objects.filter(question = self))
+        random.shuffle(answers)
+        data = []
+        for answer in answers:
+            data.append({
+                'answer':answer.answer,
+                'is_correct': answer.is_correct                
+            })
+        return data
     
 class Answer(BaseModel):
     question = models.ForeignKey(Question, related_name='question_answer', on_delete= models.CASCADE)
