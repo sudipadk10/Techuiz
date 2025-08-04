@@ -40,7 +40,7 @@
             <p class="text-sm font-semibold text-gray-800 dark:text-white">{{user.first_name}}</p>
             <p class="text-xs text-gray-500 dark:text-gray-400">{{user.email}}</p>
           </div>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
+          <a href="{% url 'dashboard' %}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
           <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Settings</a>
           <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-gray-700">Logout</a>
         </div>

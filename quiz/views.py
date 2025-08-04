@@ -160,3 +160,5 @@ def contact_view(request):
 
     return render(request, 'contact.html')
 
+def dashboard_view(request):
+    return render(request,"dashboard.html")

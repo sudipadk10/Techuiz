@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-10">
+  <div class="bg-white shadow-lg rounded-xl p-6">
+    <!-- Profile Header -->
+    <div class="flex items-center space-x-6">
+      <img src="{% static 'images/techquiz_logo.png' %}" alt="Avatar"
+           class="w-24 h-24 rounded-full border-4 border-blue-500 shadow-md">
+      <div>
+        <h2 class="text-3xl font-semibold text-gray-800">{{ user.username }}</h2>
+        <p class="text-gray-500">{{ user.email }}</p>
+        <p class="mt-1 text-sm text-gray-400">Member since {{ user.date_joined|date:"F Y" }}</p>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+      <div class="bg-blue-50 p-4 rounded-lg shadow-sm text-center">
+        <p class="text-sm text-gray-600">Total Quizzes</p>
+        <h3 class="text-xl font-bold text-blue-600">{{ total_quizzes }}</h3>
+      </div>
+      <div class="bg-green-50 p-4 rounded-lg shadow-sm text-center">
+        <p class="text-sm text-gray-600">Total Score</p>
+        <h3 class="text-xl font-bold text-green-600">{{ total_score }}</h3>
+      </div>
+      <div class="bg-yellow-50 p-4 rounded-lg shadow-sm text-center">
+        <p class="text-sm text-gray-600">Rank</p>
+        <h3 class="text-xl font-bold text-yellow-600">{{ user_rank }}</h3>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="mt-6">
+      <p class="text-sm text-gray-500 mb-1">Level Progress</p>
+      <div class="w-full bg-gray-200 h-4 rounded-full">
+        <div class="bg-blue-500 h-4 rounded-full" style="width: 50%;"></div>
+      </div>
+      <p class="text-xs text-gray-400 mt-1">{{ progress_percent }}% to next level</p>
+    </div>
+
+    <!-- Tabs -->
+  
+    
+  </div>
+</div>
+{% endblock %}

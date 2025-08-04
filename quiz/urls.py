@@ -10,5 +10,6 @@ urlpatterns = [
     path('quizzes/category/<str:name>', views.category_view, name='category'),
     path('api/get-quiz' ,views.get_quiz , name="get-quiz"),
     path('contact/',views.contact_view, name = 'contact'),
+    path('dashboard/',views.dashboard_view , name='dashboard')
 
 ]
