@@ -140,7 +140,7 @@ def contact_view(request):
         email = request.POST.get('email')
         message = request.POST.get('message')
 
-        subject = f"New message from {name} ({email})"
+        subject = f"Techuiz : New message from {name} ({email})"
         body = f"Sender: {name}\nEmail: {email}\n\nMessage:\n{message}"
 
         try:
@@ -148,7 +148,7 @@ def contact_view(request):
                 subject,
                 body,
                 settings.EMAIL_HOST_USER,
-                [settings.EMAIL_HOST_USER],  # or any other receiver email
+                [settings.EMAIL_HOST_USER ],  # or any other receiver email
                 fail_silently=False,
             )
             messages.success(request, "Your message has been sent successfully!")
