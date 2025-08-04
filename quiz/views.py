@@ -4,8 +4,11 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
+from techuiz import settings
 from .models import *
 import random
+from django.core.mail import send_mail
 
 def index(request):
     
@@ -132,5 +135,28 @@ def get_quiz(request):
     
 
 def contact_view(request):
-    return render(request,'contact.html')
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        subject = f"New message from {name} ({email})"
+        body = f"Sender: {name}\nEmail: {email}\n\nMessage:\n{message}"
+
+        try:
+            send_mail(
+                subject,
+                body,
+                settings.EMAIL_HOST_USER,
+                [settings.EMAIL_HOST_USER],  # or any other receiver email
+                fail_silently=False,
+            )
+            messages.success(request, "Your message has been sent successfully!")
+            return redirect('contact')
+        except Exception as e:
+            return HttpResponse(f"An error occurred: {e}")
+
+         
+
+    return render(request, 'contact.html')
 
